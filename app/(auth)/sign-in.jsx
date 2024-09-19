@@ -55,7 +55,7 @@ const SignIn = () => {
                             className="w-13 h-13"
                         />
 
-                        <Text className="text-2xl font-semibold text-black font-psemibold ">
+                        <Text className="text-2xl font-semibold text-black font-psemibold pr-3">
                             ScanHeritage
                         </Text>
                     </View>
