@@ -7,6 +7,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton_3 from "../../components/CustomButton_3";
 
+import { addDoc, collection, doc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import { auth, db, storage } from "../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
 
@@ -20,6 +23,41 @@ const SignUp = () => {
 
   const submit = async () => {
 
+    if (form.email === "" || form.password === "" || form.confirm_password === "") {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
+
+    // Check if password and confirm_password match
+    if (form.password !== form.confirm_password) {
+      Alert.alert("Error", "Passwords do not match");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        form.email,
+        form.password
+      );
+
+      // Add a new document in collection "users"
+      await setDoc(doc(db, "Users", res.user.uid), {
+        username: form.username,
+        email: form.email,
+        password: form.password,
+        timeStamp: serverTimestamp()
+      });
+
+      Alert.alert("Success", "User sign up successfully");
+      router.replace("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

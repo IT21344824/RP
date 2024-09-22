@@ -6,7 +6,9 @@ import { images } from "../../constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton_3 from "../../components/CustomButton_3";
-
+import { getDoc, collection, query, doc, addDoc, serverTimestamp, onSnapshot } from "firebase/firestore";
+import { auth, db, storage } from "../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const SignIn = () => {
     // const { setUser, setIsLogged } = useGlobalContext();
@@ -17,25 +19,40 @@ const SignIn = () => {
     });
 
     const submit = async () => {
-        // if (form.email === "" || form.password === "") {
-        //   Alert.alert("Error", "Please fill in all fields");
-        // }
 
-        // setSubmitting(true);
+        if (form.email === "" || form.password === "") {
+            Alert.alert("Error", "Please fill in all fields");
+            return;
+        }
 
-        // try {
-        //   await signIn(form.email, form.password);
-        //   const result = await getCurrentUser();
-        //   setUser(result);
-        //   setIsLogged(true);
+        setSubmitting(true);
 
-        //   Alert.alert("Success", "User signed in successfully");
-        //   router.replace("/home");
-        // } catch (error) {
-        //   Alert.alert("Error", error.message);
-        // } finally {
-        //   setSubmitting(false);
-        // }
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, form.email, form.password);
+            const user = userCredential.user;
+
+            const docRef = doc(db, "Users", user.uid);
+            const unsubscribe = onSnapshot(
+                docRef,
+                async (doc) => {
+                    if (doc.exists()) {
+                        Alert.alert("Success", "User Log in successfully");
+                        router.replace("/home"); // Redirect to home page
+                    } else {
+                        console.log("Invalid User !");
+                        Alert.alert("Error", "Invalid User");
+                    }
+                },
+                (error) => {
+                    console.log("Error Invalid User:", error);
+                }
+            );
+            return () => unsubscribe();
+        } catch (error) {
+            Alert.alert("Error", error.message);
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     return (
