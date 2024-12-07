@@ -1,9 +1,9 @@
 ##  contributors
 
-IT21344824 - T.E.M.A.P. Ekanayake
-IT21352294 - J.R.K.B. Jayawardhana
-IT21273094 - E.A.K.V. Ediriwickrama 
-IT21360978 - G.P.G.Y. Serasinghe
+- IT21344824 - T.E.M.A.P. Ekanayake
+- IT21352294 - J.R.K.B. Jayawardhana
+- IT21273094 - E.A.K.V. Ediriwickrama 
+- IT21360978 - G.P.G.Y. Serasinghe
 
 
 ##  overview of the project
@@ -15,15 +15,17 @@ The project involves developing a mobile application to scan and extract histori
 ![diagram-export-12-7-2024-8_39_38-PM](https://github.com/user-attachments/assets/fef6618b-31b0-4abb-86ec-8a420cfd24fe)
 
 
-##  dependencies
-### Python Libraries
-###### Data Processing - numpy , pandas
-###### Deep Learning - tensorflow , keras 
-###### Image Processing - cv2 (OpenCV library) , PIL (Pillow library)
-###### Visualization - matplotlib , seaborn 
-###### Metrics and Evaluation - sklearn 
-###### 3D Model Handling - Trimesh , PyGLTFLib
+## dependencies
 
+### Python Libraries
+- Data Processing: numpy, pandas
+- Deep Learning: tensorflow, keras
+- Image Processing: cv2 (OpenCV library), PIL (Pillow library)
+- Visualization: matplotlib, seaborn
+- Metrics and Evaluation: sklearn
+- 3D Model Handling: Trimesh, PyGLTFLib
 
 ### React Native Dependencies
-###### Three.js , React Three Fiber , react-native
+- Three.js
+- React Three Fiber
+- react-native
