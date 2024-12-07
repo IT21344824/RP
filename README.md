@@ -12,7 +12,18 @@ The project involves developing a mobile application to scan and extract histori
 
 
 ##  architectural diagram
-##  dependencies
-Languages: Python,react
+![diagram-export-12-7-2024-8_39_38-PM](https://github.com/user-attachments/assets/fef6618b-31b0-4abb-86ec-8a420cfd24fe)
 
-![phone](https://github.com/user-attachments/assets/de64a6f5-423c-465d-b0cd-e8cc433c1fff)
+
+##  dependencies
+### Python Libraries
+Data Processing - numpy , pandas
+Deep Learning - tensorflow , keras 
+Image Processing - cv2 (OpenCV library) , PIL (Pillow library)
+Visualization - matplotlib , seaborn 
+Metrics and Evaluation - sklearn 
+3D Model Handling - Trimesh , PyGLTFLib
+
+
+### React Native Dependencies
+Three.js , React Three Fiber , react-native
