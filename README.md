@@ -17,13 +17,13 @@ The project involves developing a mobile application to scan and extract histori
 
 ##  dependencies
 ### Python Libraries
-Data Processing - numpy , pandas
-Deep Learning - tensorflow , keras 
-Image Processing - cv2 (OpenCV library) , PIL (Pillow library)
-Visualization - matplotlib , seaborn 
-Metrics and Evaluation - sklearn 
-3D Model Handling - Trimesh , PyGLTFLib
+###### Data Processing - numpy , pandas
+###### Deep Learning - tensorflow , keras 
+###### Image Processing - cv2 (OpenCV library) , PIL (Pillow library)
+###### Visualization - matplotlib , seaborn 
+###### Metrics and Evaluation - sklearn 
+###### 3D Model Handling - Trimesh , PyGLTFLib
 
 
 ### React Native Dependencies
-Three.js , React Three Fiber , react-native
+###### Three.js , React Three Fiber , react-native
