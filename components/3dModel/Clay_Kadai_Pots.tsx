@@ -49,3 +49,4 @@ const Clay_Kadai_Pots = (props: JSX.IntrinsicElements["group"]) => {
 };
 
 export default Clay_Kadai_Pots;
+/*Clay*/
