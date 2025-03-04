@@ -19,7 +19,7 @@ export default function HomeScreen() {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
-  const [imageLoaded, setImageLoaded] = useState(false);
+ 
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,9 +41,10 @@ export default function HomeScreen() {
   return (
     
     <ImageBackground source={require("../assets/bg2.jpg")}style={{ width, height }} className="flex-1 relative" resizeMode="cover">
+      <SafeAreaView  className="flex-1 pb-8">
       {/* <BlurView intensity={20} className="absolute inset-0 w-screen h-screen rounded-lg" /> */}
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-      <SafeAreaView className="flex-1 justify-between pb-8">
+      
         {/* App Title */}
         <View className="mt-5 items-center">
           <Text className="text-white font-bold text-lg italic">ScanHeritage</Text>
@@ -81,18 +82,20 @@ export default function HomeScreen() {
         <Animated.View entering={FadeIn.duration(500)} className="items-center">
           <TouchableOpacity
             className="bg-amber-500 py-4 px-12 rounded-full"
-           // onPress={() => router.push("/dashboard")}
+            onPress={() => router.push("/signup" as any)}
           >
             <Text className="text-black font-bold text-lg">GET STARTED</Text>
           </TouchableOpacity>
 
-          <Text className="text-white text-sm mt-10">
+          <Text className="text-white text-sm mt-8">
             Already have an account?{' '}
-            <Text className="text-amber-500 font-semibold text-lg" >Sign In here</Text>
+            <Text className="text-amber-500 font-semibold text-lg" onPress={() => router.push("/login" as any)} >Sign In here</Text>
           </Text>
         </Animated.View>
-      </SafeAreaView>
+        </SafeAreaView>
     </ImageBackground>
+    
+ 
   );
 }
 //onPress={() => router.push("/login")}

@@ -1,5 +1,5 @@
 import WelcomeScreen from '../screens/WelcomeScreen';
 
-export default function Home() {
+export default function Welcome() {
     return <WelcomeScreen />;
 }
