@@ -23,7 +23,7 @@ const SplashScreenComponent = () => {
     setTimeout(async () => {
       await SplashScreen.hideAsync(); // Hide native splash
       router.replace("/home"); // Use router for navigation
-    }, 2000);
+    }, 10000);
   }, []);
 
   const animatedStyle = useAnimatedStyle(() => ({
