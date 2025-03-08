@@ -14,7 +14,12 @@ export default function HomeScreen() {
     { id: "1", title: "Object Detection", image: require("../../assets/facebook.png"), onPress: () => console.log("Object Detection") },
     { id: "2", title: "Brahmi OCR", image: require("../../assets/facebook.png"), onPress: () => router.push("/brahmi") }, // Navigate to BrahmiScreen
     { id: "3", title: "Feature Extraction", image: require("../../assets/facebook.png"), onPress: () => console.log("Feature Extraction") },
-    { id: "4", title: "3D Modeling", image: require("../../assets/facebook.png"), onPress: () => console.log("3D Modeling") },
+    {
+      id: "4", title: "3D Modeling", image: require("../../assets/facebook.png"), onPress: () => {
+        console.log("3D Modeling")
+        router.push("/3dModels")
+      }
+    },
   ];
 
   return (
@@ -27,7 +32,7 @@ export default function HomeScreen() {
       >
         <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
 
-        <ScrollView 
+        <ScrollView
           contentContainerStyle={{ flexGrow: 1, minHeight: height + 80 }} // Extend Background
           showsVerticalScrollIndicator={false}
         >
