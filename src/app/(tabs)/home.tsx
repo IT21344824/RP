@@ -11,7 +11,12 @@ export default function HomeScreen() {
   const router = useRouter(); // Initialize navigation
 
   const features = [
-    { id: "1", title: "Object Detection", image: require("../../assets/facebook.png"), onPress: () => console.log("Object Detection") },
+    {
+      id: "1", title: "Object Detection", image: require("../../assets/facebook.png"), onPress: () => {
+        console.log("Object Detection")
+        router.push("/objectDetection")
+      }
+    },
     { id: "2", title: "Brahmi OCR", image: require("../../assets/facebook.png"), onPress: () => router.push("/brahmi") }, // Navigate to BrahmiScreen
     { id: "3", title: "Feature Extraction", image: require("../../assets/facebook.png"), onPress: () => console.log("Feature Extraction") },
     {

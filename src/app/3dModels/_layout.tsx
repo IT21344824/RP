@@ -1,4 +1,4 @@
-import { StackNavigator } from "@/layouts/StackNavigator";
+// import { StackNavigator } from "@/layouts/StackNavigator";
 import { TransitionPresets } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";

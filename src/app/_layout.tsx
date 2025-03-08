@@ -53,6 +53,7 @@ const Layout = () => {
         {/* <Stack.Screen name="/serach/[query]" options={{ headerShown: false }} /> */}
 
         <Stack.Screen name="3dModels" options={{ headerShown: false }} />
+        <Stack.Screen name="objectDetection" options={{ headerShown: false }} />
 
       </Stack>
     </GestureHandlerRootView>
