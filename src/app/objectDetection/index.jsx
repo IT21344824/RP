@@ -15,7 +15,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { MotiView } from "moti";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
+import { MaterialIcons } from "@expo/vector-icons"; // For camera icon
 
 const Home3D = () => {
   const { width } = useWindowDimensions();
@@ -124,6 +125,20 @@ const Home3D = () => {
     }
   };
 
+  const handleCamera = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaView style={styles.container}>
@@ -141,6 +156,11 @@ const Home3D = () => {
               OBJECT DETECT PART
             </Animated.Text>
           </MotiView>
+
+          {/* Camera Icon */}
+          <TouchableOpacity onPress={handleCamera} style={styles.cameraIconContainer}>
+            <MaterialIcons name="camera-alt" size={40} color="#F59E0B" />
+          </TouchableOpacity>
 
           <TouchableOpacity style={styles.uploadButton} onPress={handleImagePicker}>
             <Text style={styles.uploadButtonText}>
@@ -181,8 +201,8 @@ const Home3D = () => {
 export default Home3D;
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
+  container: {
+    flex: 1,
     backgroundColor: "#000", // Black Background
   },
   cardContainer: {
@@ -229,5 +249,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#F59E0B", // Amber 500 text
     marginBottom: 5,
+  },
+  cameraIconContainer: {
+    alignItems: "center",
+    marginTop: 10,
   },
 });
