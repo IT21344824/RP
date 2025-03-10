@@ -97,52 +97,11 @@ const Home3D = () => {
     }
   };
 
-  const handleNavigate3D = () => {
-    if (types) {
-      switch (types) {
-        case "Clay_Kadai_Pots":
-          router.push("/3dModels/3dmodel_CKP");
-          break;
-        case "Clay_Medium_Pots":
-          router.push("/3dModels/3dmodel_CKP");
-          break;
-        case "Clay_Mini_Pots":
-          router.push("/3dModels/3dmodel_CMP");
-          break;
-        case "Clay_Plates":
-          router.push("/3dModels/3dmodel_Cp");
-          break;
-        case "Clay_Rice_Pots":
-          router.push("/3dModels/3dmodel_CRP");
-          break;
-        case "Metal_Cups":
-          router.push("/3dModels/3dmodel_MC");
-          break;
-        case "Stone_Moonstone":
-          router.push("/3dModels/3dModel");
-          break;
-        case "Stone_Vessel_Metal_Base":
-          router.push("/3dModels/3dmodel_SVMB");
-          break;
-        case "Wood_Cup":
-          router.push("/3dModels/3dmodel_WC");
-          break;
-        case "Wood_Sandalwood_Cup":
-          router.push("/3dModels/3dmodel_WSC");
-          break;
-        default:
-          alert("No matching screen for the detected type.");
-      }
-    } else {
-      alert("No types detected.");
-    }
-  };
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaView style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <StatusBar animated style="dark" />
+          <StatusBar animated style="light" />
           <MotiView
             from={{ opacity: 0, translateY: 50 }}
             animate={{ opacity: 1, translateY: 0 }}
@@ -153,28 +112,24 @@ const Home3D = () => {
             </View>
           </MotiView>
 
-          {/* Button to trigger image picker */}
           <TouchableOpacity style={styles.uploadButton} onPress={handleImagePicker}>
             <Text style={styles.uploadButtonText}>
               {loading ? "Processing..." : "Select Image"}
             </Text>
           </TouchableOpacity>
 
-          {/* Display selected image */}
           {image && (
             <Image source={{ uri: image }} style={styles.selectedImage} resizeMode="contain" />
           )}
 
-          {/* Upload and Predict button */}
           {image && (
             <TouchableOpacity style={styles.uploadButton} onPress={() => handlePrediction(image)}>
               <Text style={styles.uploadButtonText}>
-                {loading ? "Processing..." : "Upload and Predict"}
+                {loading ? "Processing..." : "Details"}
               </Text>
             </TouchableOpacity>
           )}
 
-          {/* Identified object details */}
           {types && (
             <View style={styles.detailsContainer}>
               <Text style={styles.detailsText}>Object Type: {types}</Text>
@@ -186,14 +141,7 @@ const Home3D = () => {
             </View>
           )}
 
-          {/* 3D Button to navigate based on type */}
-          {types && (
-            <TouchableOpacity style={styles.uploadButton} onPress={handleNavigate3D}>
-              <Text style={styles.uploadButtonText}>Go to 3D Model</Text>
-            </TouchableOpacity>
-          )}
-
-          {loading && <ActivityIndicator size="large" color="#0000ff" />}
+          {loading && <ActivityIndicator size="large" color="#F59E0B" />}
         </ScrollView>
       </SafeAreaView>
     </GestureHandlerRootView>
@@ -203,32 +151,35 @@ const Home3D = () => {
 export default Home3D;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F6F6F6" },
+  container: { 
+    flex: 1, 
+    backgroundColor: "#000", // Black Background
+  },
   cardContainer: {
     flex: 1,
     justifyContent: "space-around",
     alignItems: "center",
     alignSelf: "center",
-    backgroundColor: "#1C6BC8",
+    backgroundColor: "#F59E0B", // Amber 500
     aspectRatio: 16 / 9,
     marginTop: 10,
     borderRadius: 25,
   },
   cardText: {
-    color: "white",
+    color: "black",
     fontSize: 28,
     textAlign: "center",
     fontWeight: "bold",
   },
   uploadButton: {
-    backgroundColor: "#1C6BC8",
+    backgroundColor: "#F59E0B", // Amber 500
     padding: 15,
     borderRadius: 10,
     margin: 20,
     alignItems: "center",
   },
   uploadButtonText: {
-    color: "white",
+    color: "black",
     fontSize: 18,
     fontWeight: "bold",
   },
@@ -238,7 +189,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   detailsContainer: {
-    backgroundColor: "#E0E0E0",
+    backgroundColor: "#222", // Dark Gray to contrast with black background
     padding: 15,
     borderRadius: 10,
     margin: 20,
@@ -246,7 +197,7 @@ const styles = StyleSheet.create({
   detailsText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#333",
+    color: "#F59E0B", // Amber 500 text
     marginBottom: 5,
   },
 });
