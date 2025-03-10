@@ -21,7 +21,7 @@ const Home3D = () => {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
   const router = useRouter();
-  const [types, setTypes] = useState([]);
+  const [types, setTypes] = useState("");
   const [objectDetails, setObjectDetails] = useState({
     yearPeriod: "",
     use: "",
@@ -45,7 +45,7 @@ const Home3D = () => {
     });
 
     try {
-      const response = await fetch("http://192.168.58.153:5000/predict", {
+      const response = await fetch("http://192.168.207.98:5000/predict", {
         method: "POST",
         body: formData,
         headers: {
@@ -63,25 +63,17 @@ const Home3D = () => {
       const data = await response.json();
       console.log("Response Data:", data);
 
-      // const types = data.prediction.map(item => item.Types);
-      // setTypes(types); // Store the types in state
-
       if (data.prediction.length > 0) {
         const firstPrediction = data.prediction[0];
         setTypes(firstPrediction.Types);
         setObjectDetails({
-          yearPeriod: firstPrediction['Year/Period'] || "Unknown", // Corrected the field name here
+          yearPeriod: firstPrediction.Year_Period || "Unknown",
           use: firstPrediction.Use || "Unknown",
-          culturalSignificance: firstPrediction['Cultural Significance'] || "Unknown", // Corrected the field name here    
+          culturalSignificance: firstPrediction.Cultural_Significance || "Unknown",
         });
-
-        console.log("data :", data);
-        console.log("types 1:", types);
-        console.log("types 2:", types[0]);
-      } else {
+      } else { 
         alert("No object detected.");
       }
-
     } catch (error) {
       console.error("Error:", error);
       alert("Something went wrong. Check the console for details.");
@@ -90,9 +82,7 @@ const Home3D = () => {
     }
   };
 
-
   const handleImagePicker = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: true,
@@ -107,10 +97,8 @@ const Home3D = () => {
     }
   };
 
-
   const handleNavigate3D = () => {
-    if (types.length > 0) {
-      // const type = types[0]; // Assuming only one type is returned
+    if (types) {
       switch (types) {
         case "Clay_Kadai_Pots":
           router.push("/3dModels/3dmodel_CKP");
@@ -127,57 +115,21 @@ const Home3D = () => {
         case "Clay_Rice_Pots":
           router.push("/3dModels/3dmodel_CRP");
           break;
-        // case "Clay_Storage_Pots":
-        //     router.push("/3dModels/3dModel4");
-        //     break;
-        // case "Clay_Tawa_Plates":
-        //     router.push("/3dModels/3dModel6");
-        //     break;
-        // case "Clay_Tea_Plates":
-        //     router.push("/3dModels/3dModel2");
-        //     break;
-        // case "Clay_Water_Cups":
-        //     router.push("/3dModels/3dModel7");
-        //     break;
-        // case "Clay_Water_Pots":
-        //     router.push("/3dModels/3dModel8");
-        //     break;
         case "Metal_Cups":
           router.push("/3dModels/3dmodel_MC");
           break;
-        // case "Metal_Pots":
-        //     router.push("/3dModels/3dModel10");
-        //     break;
-        // case "Metal_Swords":
-        //     router.push("/3dModels/3dModel11");
-        //     break;
         case "Stone_Moonstone":
           router.push("/3dModels/3dModel");
           break;
-        // case "Stone_Pillars":
-        //     router.push("/3dModels/3dModel13");
-        //     break;
-        // case "Stone_Sandalwood_Grinder":
-        //     router.push("/3dModels/3dModel");
-        //     break;
         case "Stone_Vessel_Metal_Base":
           router.push("/3dModels/3dmodel_SVMB");
           break;
-        // case "Wood_Carved_Coconut_Shell":
-        //     router.push("/3dModels/3dModel16");
-        //     break;
-        // case "Wood_Coconut_Shell":
-        //     router.push("/3dModels/3dModel17");
-        //     break;
         case "Wood_Cup":
           router.push("/3dModels/3dmodel_WC");
           break;
         case "Wood_Sandalwood_Cup":
           router.push("/3dModels/3dmodel_WSC");
           break;
-        // case "Wood_Sandalwood_Jar":
-        //     router.push("/3dModels/3dModel20");
-        //     break;
         default:
           alert("No matching screen for the detected type.");
       }
@@ -185,7 +137,6 @@ const Home3D = () => {
       alert("No types detected.");
     }
   };
-
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -203,31 +154,20 @@ const Home3D = () => {
           </MotiView>
 
           {/* Button to trigger image picker */}
-          <TouchableOpacity
-            style={styles.uploadButton}
-            onPress={handleImagePicker}
-          >
+          <TouchableOpacity style={styles.uploadButton} onPress={handleImagePicker}>
             <Text style={styles.uploadButtonText}>
               {loading ? "Processing..." : "Select Image"}
             </Text>
-
           </TouchableOpacity>
 
           {/* Display selected image */}
           {image && (
-            <Image
-              source={{ uri: image }}
-              style={styles.selectedImage}
-              resizeMode="contain"
-            />
+            <Image source={{ uri: image }} style={styles.selectedImage} resizeMode="contain" />
           )}
 
           {/* Upload and Predict button */}
           {image && (
-            <TouchableOpacity
-              style={styles.uploadButton}
-              onPress={() => handlePrediction(image)}
-            >
+            <TouchableOpacity style={styles.uploadButton} onPress={() => handlePrediction(image)}>
               <Text style={styles.uploadButtonText}>
                 {loading ? "Processing..." : "Upload and Predict"}
               </Text>
@@ -246,13 +186,9 @@ const Home3D = () => {
             </View>
           )}
 
-
           {/* 3D Button to navigate based on type */}
-          {types.length > 0 && (
-            <TouchableOpacity
-              style={styles.uploadButton}
-              onPress={handleNavigate3D}
-            >
+          {types && (
+            <TouchableOpacity style={styles.uploadButton} onPress={handleNavigate3D}>
               <Text style={styles.uploadButtonText}>Go to 3D Model</Text>
             </TouchableOpacity>
           )}
