@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,6 +8,7 @@ import {
   View,
   ActivityIndicator,
   Image,
+  Animated,
 } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -27,6 +28,32 @@ const Home3D = () => {
     use: "",
     culturalSignificance: "",
   });
+
+  const [blinkAnim] = useState(new Animated.Value(1)); // Initial opacity 1
+
+  useEffect(() => {
+    // Create a blink effect by changing opacity between 1 and 0
+    const blink = () => {
+      Animated.sequence([
+        Animated.timing(blinkAnim, {
+          toValue: 0,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+        Animated.timing(blinkAnim, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+      ]).start(() => blink()); // Restart the blinking animation
+    };
+
+    blink(); // Start blinking on mount
+
+    return () => {
+      blinkAnim.stopAnimation(); // Stop animation when component unmounts
+    };
+  }, [blinkAnim]);
 
   const handlePrediction = async (fileUri) => {
     setLoading(true);
@@ -71,7 +98,7 @@ const Home3D = () => {
           use: firstPrediction.Use || "Unknown",
           culturalSignificance: firstPrediction.Cultural_Significance || "Unknown",
         });
-      } else { 
+      } else {
         alert("No object detected.");
       }
     } catch (error) {
@@ -102,14 +129,17 @@ const Home3D = () => {
       <SafeAreaView style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <StatusBar animated style="light" />
+
           <MotiView
             from={{ opacity: 0, translateY: 50 }}
             animate={{ opacity: 1, translateY: 0 }}
             style={[styles.cardContainer, { width: width * 0.95 }]}
           >
-            <View>
-              <Text style={styles.cardText}>3D Models</Text>
-            </View>
+            <Animated.Text
+              style={[styles.cardText, { opacity: blinkAnim }]}
+            >
+              OBJECT DETECT PART
+            </Animated.Text>
           </MotiView>
 
           <TouchableOpacity style={styles.uploadButton} onPress={handleImagePicker}>
