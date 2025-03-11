@@ -14,7 +14,7 @@ export default function Signup() {
   const insets = useSafeAreaInsets(); // Fixes Notch Area
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-900 px-6 pb-8">
+    <SafeAreaView className="flex-1 bg-black px-6 pb-8">
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
 
       {/* Header */}

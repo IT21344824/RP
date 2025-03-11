@@ -54,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({ username, profileImage }) => {
 
   return (
 <View
-      className="w-full overflow-hidden shadow-lg"
+      className="w-full overflow-hidden shadow-lg "
       style={{
         borderBottomLeftRadius: 25,  // Adjust radius as needed
         borderBottomRightRadius: 25, // Adjust radius as needed
@@ -62,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({ username, profileImage }) => {
     >
       <ImageBackground
         source={require("../assets/head_bg.png")} // Ensure you have this asset
-        className="w-full h-36 p-5"
+        className="w-full h-44 p-5"
         resizeMode="cover"
         style={{
           borderBottomLeftRadius: 25,
@@ -70,7 +70,7 @@ const Header: React.FC<HeaderProps> = ({ username, profileImage }) => {
           overflow: "hidden",
         }}
       >
-      <View className="flex-row justify-between items-center mt-5">
+      <View className="flex-row justify-between items-center mt-12">
         {/* Profile Section */}
         <TouchableOpacity onPress={() => router.push("/login")} className="flex-row items-center">
           <Image

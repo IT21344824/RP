@@ -1,6 +1,5 @@
 import React from "react";
-import { View, Text, ImageBackground, StatusBar, ScrollView, Dimensions } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, Text, ImageBackground, StatusBar, ScrollView, Dimensions ,SafeAreaView } from "react-native";
 import { useRouter } from "expo-router"; // Import useRouter
 import Header from "../../components/Header";
 import FeatureGrid from "../../components/FeatureGrid";
