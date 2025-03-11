@@ -71,7 +71,7 @@ export default function Login() {
 
             {/* Sign In Button with Glowing Border */}
             <TouchableOpacity className="bg-amber-500 py-4 rounded-lg mt-8 border-2 border-yellow-300 shadow-lg shadow-yellow-400" onPress={() => handleSubmit()}> 
-              <Text className="text-center text-black font-bold text-lg">Sign in</Text>
+              <Text className="text-center text-black font-bold text-lg">SIGN IN</Text>
             </TouchableOpacity>
           </Animated.View>
         )}

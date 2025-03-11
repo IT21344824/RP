@@ -75,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ username, profileImage }) => {
         <TouchableOpacity onPress={() => router.push("/login")} className="flex-row items-center">
           <Image
             source={profileImage}
-            className="w-14 h-14 rounded-full border-2 border-white"
+            className="w-14 h-14 rounded-full border-2 border-white p-3"
           />
           <View className="ml-3">
             <Text className="text-white font-medium text-lg opacity-80">Welcome!</Text>

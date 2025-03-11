@@ -11,15 +11,15 @@ export default function HomeScreen() {
 
   const features = [
     {
-      id: "1", title: "Object Detection", image: require("../../assets/facebook.png"), onPress: () => {
+      id: "1", title: "Object Detection", image: require("../../assets/object.png"), onPress: () => {
         console.log("Object Detection")
         router.push("/objectDetection")
       }
     },
-    { id: "2", title: "Brahmi OCR", image: require("../../assets/facebook.png"), onPress: () => router.push("/brahmi") }, // Navigate to BrahmiScreen
-    { id: "3", title: "Feature Extraction", image: require("../../assets/facebook.png"), onPress: () => console.log("Feature Extraction") },
+    { id: "2", title: "Brahmi OCR", image: require("../../assets/ocr.jpg"), onPress: () => router.push("/brahmi") }, // Navigate to BrahmiScreen
+    { id: "3", title: "Feature Extraction", image: require("../../assets/feature.png"), onPress: () => console.log("Feature Extraction") },
     {
-      id: "4", title: "3D Modeling", image: require("../../assets/facebook.png"), onPress: () => {
+      id: "4", title: "3D Modeling", image: require("../../assets/3d.jpg"), onPress: () => {
         console.log("3D Modeling")
         router.push("/3dModels")
       }
@@ -41,12 +41,12 @@ export default function HomeScreen() {
           showsVerticalScrollIndicator={false}
         >
           {/* Header Component */}
-          <Header username="YourUsername" profileImage={require("../../assets/facebook.png")} />
+          <Header username="Your-Username" profileImage={require("../../assets/user.png")} />
 
           {/* Title & Subtitle */}
-          <View className="mt-6 px-6">
+          <View className="mt-12 px-6">
             <Text className="text-white font-bold text-3xl text-center">ScanHeritage</Text>
-            <Text className="text-gray-400 text-lg text-center mt-2">
+            <Text className="text-gray-400 text-lg text-center mt-6">
               Join the Cultural Revolution with AI
             </Text>
           </View>

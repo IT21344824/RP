@@ -23,9 +23,9 @@ const FeatureGrid: React.FC<FeatureGridProps> = ({ features }) => {
         <TouchableOpacity
           key={feature.id}
           onPress={feature.onPress}
-          className=" w-52 h-52 bg-white rounded-lg shadow-md flex items-center justify-center shadow-slate-500"
+          className=" w-52 h-52 bg-white rounded-xl shadow-md flex items-center justify-center shadow-slate-800"
         >
-          <Image source={feature.image} className="w-24 h-24 mb-2" />
+          <Image source={feature.image} className="w-24 h-24 mb-2 rounded-3xl" />
           <Text className="text-black font-semibold text-sm text-center">
             {feature.title}
           </Text>

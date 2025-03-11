@@ -44,7 +44,7 @@ export default function Signup() {
           <Animated.View entering={FadeInUp.duration(500)} className="mt-10 space-y-8">
             {/* Username Input */}
             <FormInput
-              placeholder="UserName"
+              placeholder="Username"
               value={values.username}
               onChangeText={handleChange("username")}
               onBlur={handleBlur("username")}
@@ -74,7 +74,7 @@ export default function Signup() {
 
             {/* Signup Button with Glowing Effect */}
             <TouchableOpacity className="bg-amber-500 py-4 rounded-lg mt-8 border-2 border-yellow-300 shadow-lg shadow-yellow-400" onPress={() => handleSubmit()}>
-              <Text className="text-center text-black font-bold text-lg">Sign Up</Text>
+              <Text className="text-center text-black font-bold text-lg">SIGN UP</Text>
             </TouchableOpacity>
           </Animated.View>
         )}
