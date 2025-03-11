@@ -15,14 +15,7 @@ import CustomButton_2 from '../components/CustomButton_2';
 import "../../global.css";
 
 export default function index() {
-    return (
-
-        <SafeAreaView className='flex-1' >
-
-            <LauncherScreen />
-        </SafeAreaView>
-
-    );
+    return <LauncherScreen />;
 }
 
 

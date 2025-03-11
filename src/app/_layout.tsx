@@ -47,15 +47,13 @@ const Layout = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
 
 
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        {/* <Stack.Screen name="/serach/[query]" options={{ headerShown: false }} /> */}
+<Stack screenOptions={{ headerShown: false }}>
+  <Stack.Screen name="index" />
+  <Stack.Screen name="(auth)" />
+  <Stack.Screen name="3dModels" />
+  <Stack.Screen name="objectDetection" />
+</Stack>
 
-        <Stack.Screen name="3dModels" options={{ headerShown: false }} />
-        <Stack.Screen name="objectDetection" options={{ headerShown: false }} />
-
-      </Stack>
     </GestureHandlerRootView>
   );
 };
