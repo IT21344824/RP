@@ -73,7 +73,7 @@ const Home3D = () => {
     });
 
     try {
-      const response = await fetch("http://192.168.207.98:5000/predict", {
+      const response = await fetch("http://192.168.95.98:5000/predict", {
         method: "POST",
         body: formData,
         headers: {
