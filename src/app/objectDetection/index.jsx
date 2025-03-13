@@ -33,7 +33,6 @@ const Home3D = () => {
   const [blinkAnim] = useState(new Animated.Value(1)); // Initial opacity 1
 
   useEffect(() => {
-    // Create a blink effect by changing opacity between 1 and 0
     const blink = () => {
       Animated.sequence([
         Animated.timing(blinkAnim, {
@@ -46,13 +45,13 @@ const Home3D = () => {
           duration: 500,
           useNativeDriver: true,
         }),
-      ]).start(() => blink()); // Restart the blinking animation
+      ]).start(() => blink());
     };
 
-    blink(); // Start blinking on mount
+    blink();
 
     return () => {
-      blinkAnim.stopAnimation(); // Stop animation when component unmounts
+      blinkAnim.stopAnimation();
     };
   }, [blinkAnim]);
 
@@ -112,13 +111,11 @@ const Home3D = () => {
 
   const handleImagePicker = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ['images'],
+      mediaTypes: ["images"],
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
@@ -132,8 +129,6 @@ const Home3D = () => {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
@@ -145,14 +140,13 @@ const Home3D = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <StatusBar animated style="light" />
 
+          {/* Enlarged Object Detect Part Card */}
           <MotiView
             from={{ opacity: 0, translateY: 50 }}
             animate={{ opacity: 1, translateY: 0 }}
             style={[styles.cardContainer, { width: width * 0.95 }]}
           >
-            <Animated.Text
-              style={[styles.cardText, { opacity: blinkAnim }]}
-            >
+            <Animated.Text style={[styles.cardText, { opacity: blinkAnim }]}>
               OBJECT DETECT PART
             </Animated.Text>
           </MotiView>
@@ -206,13 +200,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#000", // Black Background
   },
   cardContainer: {
-    flex: 1,
-    justifyContent: "space-around",
+    justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
     backgroundColor: "#F59E0B", // Amber 500
-    aspectRatio: 16 / 9,
-    marginTop: 10,
+    paddingVertical: 30, // Increased padding for bigger card
+    paddingHorizontal: 40, // More horizontal padding
+    minHeight: 120, // Ensuring larger height
+    width: "90%", // Make it wider
+    marginTop: 20, // Adjust margin for better spacing
     borderRadius: 25,
   },
   cardText: {
@@ -222,7 +218,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   uploadButton: {
-    backgroundColor: "#F59E0B", // Amber 500
+    backgroundColor: "#F59E0B",
     padding: 15,
     borderRadius: 10,
     margin: 20,
@@ -239,7 +235,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   detailsContainer: {
-    backgroundColor: "#222", // Dark Gray to contrast with black background
+    backgroundColor: "#222",
     padding: 15,
     borderRadius: 10,
     margin: 20,
@@ -247,7 +243,7 @@ const styles = StyleSheet.create({
   detailsText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#F59E0B", // Amber 500 text
+    color: "#F59E0B",
     marginBottom: 5,
   },
   cameraIconContainer: {
