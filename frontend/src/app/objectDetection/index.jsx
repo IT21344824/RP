@@ -72,7 +72,7 @@ const Home3D = () => {
     });
 
     try {
-      const response = await fetch("http://192.168.95.98:5000/predict", {
+      const response = await fetch("http://172.28.16.76:5000/predict", {
         method: "POST",
         body: formData,
         headers: {
@@ -96,7 +96,7 @@ const Home3D = () => {
         setObjectDetails({
           yearPeriod: firstPrediction.Year_Period || "Unknown",
           use: firstPrediction.Use || "Unknown",
-          culturalSignificance: firstPrediction.Cultural_Significance || "Unknown",
+          culturalSignificance: firstPrediction["Cultural_Significance"] || "Unknown",
         });
       } else {
         alert("No object detected.");
@@ -134,6 +134,116 @@ const Home3D = () => {
     }
   };
 
+
+  const handleNavigate3D = () => {
+    if (types.length > 0) {
+      // const type = types[0]; // Assuming only one type is returned
+      switch (types) {
+        case "Clay_Kadai_Pots":
+          router.push("/3dModels/3dmodel_CKP");
+          break;
+        case "Clay_Medium_Pots":
+          router.push("/3dModels/3dmodel_CKP");
+          break;
+        case "Clay_Mini_Pots":
+          router.push("/3dModels/3dmodel_CMP");
+          break;
+        case "Clay_Plates":
+          router.push("/3dModels/3dmodel_Cp");
+          break;
+        case "Clay_Rice_Pots":
+          router.push("/3dModels/3dmodel_CRP");
+          break;
+
+        case "Clay_Storage_Pots":
+          console.log("Clay_Storage_Pots")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel4");
+          break;
+        case "Clay_Tawa_Plates":
+          console.log("Clay_Tawa_Plates")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel6");
+          break;
+        case "Clay_Tea_Plates":
+          console.log("Clay_Tea_Plates")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel2");
+          break;
+        case "Clay_Water_Cups":
+          console.log("Clay_Water_Cups")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel7");
+          break;
+        case "Clay_Water_Pots":
+          console.log("Clay_Water_Pots")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel8");
+          break;
+
+        case "Metal_Cups":
+          router.push("/3dModels/3dmodel_MC");
+          break;
+
+        case "Metal_Pots":
+          console.log("Metal_Pots")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel10");
+          break;
+        case "Metal_Swords":
+          console.log("Metal_Swords")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel11");
+          break;
+
+        case "Stone_Moonstone":
+          router.push("/3dModels/3dModel");
+          break;
+
+        case "Stone_Pillars":
+          console.log("Stone_Pillars")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel13");
+          break;
+        case "Stone_Sandalwood_Grinder":
+          console.log("Stone_Sandalwood_Grinder")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel");
+          break;
+
+        case "Stone_Vessel_Metal_Base":
+          router.push("/3dModels/3dmodel_SVMB");
+          break;
+
+        case "Wood_Carved_Coconut_Shell":
+          console.log("Wood_Carved_Coconut_Shell")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel16");
+          break;
+        case "Wood_Coconut_Shell":
+          console.log("Wood_Coconut_Shell")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel17");
+          break;
+
+        case "Wood_Cup":
+          router.push("/3dModels/3dmodel_WC");
+          break;
+        case "Wood_Sandalwood_Cup":
+          router.push("/3dModels/3dmodel_WSC");
+          break;
+        case "Wood_Sandalwood_Jar":
+          console.log("Wood_Sandalwood_Jar")
+          alert(`can not identtify the object or can not create a 3d model`);
+          // router.push("/3dModels/3dModel20");
+          break;
+        default:
+          alert("No matching screen for the detected type.");
+      }
+    } else {
+      alert("No types detected.");
+    }
+  };
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaView style={styles.container}>
@@ -175,15 +285,26 @@ const Home3D = () => {
           )}
 
           {types && (
-            <View style={styles.detailsContainer}>
-              <Text style={styles.detailsText}>Object Type: {types}</Text>
-              <Text style={styles.detailsText}>Year/Period: {objectDetails.yearPeriod}</Text>
-              <Text style={styles.detailsText}>Use: {objectDetails.use}</Text>
+            <View style={styles.detailsContainer} className="gap-4">
+              <Text style={styles.detailsText} ><Text className="text-rose-600">Object Type:</Text> {types}</Text>
+              <Text style={styles.detailsText}> <Text className="text-rose-600">Year/Period:</Text> {objectDetails.yearPeriod}</Text>
+              <Text style={styles.detailsText}> <Text className="text-rose-600">Use:</Text> {objectDetails.use}</Text>
               <Text style={styles.detailsText}>
-                Cultural Significance: {objectDetails.culturalSignificance}
+                <Text className="text-rose-600 "> Cultural Significance:</Text> {objectDetails.culturalSignificance}
               </Text>
             </View>
           )}
+
+          {/* 3D Button to navigate based on type */}
+          {types.length > 0 && (
+            <TouchableOpacity
+              style={styles.uploadButton}
+              onPress={handleNavigate3D}
+            >
+              <Text style={styles.uploadButtonText}>Go to 3D Model</Text>
+            </TouchableOpacity>
+          )}
+
 
           {loading && <ActivityIndicator size="large" color="#F59E0B" />}
         </ScrollView>

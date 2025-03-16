@@ -19,7 +19,7 @@ export default function HomeScreen() {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
- 
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,12 +39,12 @@ export default function HomeScreen() {
   };
 
   return (
-    
-    <ImageBackground source={require("../assets/bg2.jpg")}style={{ width, height }} className="flex-1 relative" resizeMode="cover">
-      <SafeAreaView  className="flex-1 pb-8">
-      {/* <BlurView intensity={20} className="absolute inset-0 w-screen h-screen rounded-lg" /> */}
-      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
-      
+
+    <ImageBackground source={require("../assets/bg2.jpg")} style={{ width, height }} className="flex-1 relative" resizeMode="cover">
+      <SafeAreaView className="flex-1 pb-8">
+        {/* <BlurView intensity={20} className="absolute inset-0 w-screen h-screen rounded-lg" /> */}
+        <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+
         {/* App Title */}
         <View className="mt-5 items-center">
           <Text className="text-white font-bold text-lg italic">ScanHeritage</Text>
@@ -92,10 +92,10 @@ export default function HomeScreen() {
             <Text className="text-amber-500 font-semibold text-lg" onPress={() => router.push("/login" as any)} >Sign In here</Text>
           </Text>
         </Animated.View>
-        </SafeAreaView>
+      </SafeAreaView>
     </ImageBackground>
-    
- 
+
+
   );
 }
 //onPress={() => router.push("/login")}

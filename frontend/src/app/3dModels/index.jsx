@@ -107,19 +107,22 @@ const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F6F6F6" },
+  container: {
+    flex: 1, backgroundColor: "#000", // Black Background
+  },
   cardContainer: {
     flex: 1,
     justifyContent: "space-around",
     alignItems: "center",
     alignSelf: "center",
-    backgroundColor: "#1C6BC8",
+    backgroundColor: "#F59E0B", // Amber 500
     aspectRatio: 16 / 9,
     marginTop: 10,
     borderRadius: 25,
   },
+
   cardText: {
-    color: "white",
+    color: "black",
     fontSize: 28,
     textAlign: "center",
     fontWeight: "bold",
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#f2d29b",
   },
   listText: { color: "black", fontFamily: "Inter-Medium" },
 });
