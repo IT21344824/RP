@@ -9,7 +9,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 
-
+# give your file environment path to here
 model_path = "D:/RP model/ML/ML/artifacts/pot.h5"
 file_path = "D:/RP model/ML/ML/details.csv"
 
