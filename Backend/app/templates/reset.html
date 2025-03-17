@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            color: #000000; /* Black color */
+            text-align: center;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: #f59e0b; /* Amber-500 color */
+            font-weight: bold;
+        }
+
+        .copy-icon {
+            cursor: pointer;
+            margin-left: 10px;
+            color: #f59e0b; /* Amber-500 color */
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: #f59e0b; /* Amber-500 color */
+            text-decoration: none;
+        }
+
+        .important {
+            font-weight: bold;
+            color: #ff3e36;
+        }
+
+    </style>
+    <!-- Include FontAwesome for the copy icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+
+    <div class="container">
+        <h1>Password Reset Request</h1>
+        <p>Hello <strong>{{ username }}</strong>,</p>
+        <p>We received a request to reset the password for your ScanHeritage account. If you didn't make this request, please ignore this email.</p>
+        <p></p>
+        <p></p>
+        <p>Your password reset pin is: <span class="highlight" id="pin">{{ pin }}</span> 
+            <i class="fas fa-copy copy-icon" title="Copy to clipboard" onclick="copyToClipboard()"></i>
+        </p>
+        <p></p>
+        <p></p>
+        <p>This pin will expire in 10 seconds. Please use it before it expires!</p>
+
+        <p>If you need further assistance, please feel free to reach out to us.</p>
+
+        <p class="footer">Thank you for using ScanHeritage. If you have any questions, visit our <a href="#">Help Center</a>.</p>
+        <p class="footer">ScanHeritage Team | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+
+    <script>
+        // Function to copy the pin to clipboard
+        function copyToClipboard() {
+            var pin = document.getElementById('pin').innerText;
+            var textarea = document.createElement('textarea');
+            textarea.value = pin;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Pin copied to clipboard!');
+        }
+    </script>
+
+</body>
+</html>
