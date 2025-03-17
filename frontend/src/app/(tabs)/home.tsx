@@ -3,11 +3,13 @@ import { View, Text, ImageBackground, StatusBar, ScrollView, Dimensions ,SafeAre
 import { useRouter } from "expo-router"; // Import useRouter
 import Header from "../../components/Header";
 import FeatureGrid from "../../components/FeatureGrid";
+import useAuthStore from "../../store/useAuthStore"
 
 const { height } = Dimensions.get("window"); // Get full screen height
 
 export default function HomeScreen() {
   const router = useRouter(); // Initialize navigation
+  const user = useAuthStore((state) => state.user); // Fetch user from Zustand
 
   const features = [
     {
@@ -41,7 +43,7 @@ export default function HomeScreen() {
           showsVerticalScrollIndicator={false}
         >
           {/* Header Component */}
-          <Header username="Your-Username" profileImage={require("../../assets/user.png")} />
+          <Header />
 
           {/* Title & Subtitle */}
           <View className="mt-12 px-6">
