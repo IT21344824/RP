@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
+import Toast from "react-native-toast-message";
+import useAuthStore from "../store/useAuthStore";
 // import "react-native-url-polyfill/auto";
 import { SplashScreen, Stack } from "expo-router";
 import "../../global.css";
@@ -26,7 +27,12 @@ const Layout = () => {
     "Lobster-Regular": require("../assets/fonts/Lobster-Regular.ttf"),
   });
 
+  const loadUser = useAuthStore((state) => state.loadUser); // Load user from Zustand
+
   useEffect(() => {
+    // Load user data on app start
+    loadUser();
+
     if (error) throw error;
 
     if (fontsLoaded) {
@@ -54,6 +60,8 @@ const Layout = () => {
   <Stack.Screen name="objectDetection" />
 </Stack>
 
+{/* Toast Messages Component */}
+<Toast />
     </GestureHandlerRootView>
   );
 };
