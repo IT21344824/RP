@@ -7,11 +7,15 @@ import { Formik } from "formik";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import FormInput from "../../components/formLogin"; // Reusable Input Component
 import { SignupSchema } from "../../validations/SignupSchema"; // Validation Schema
+import useAuthStore from "../../store/useAuthStore";
+import Toast from "react-native-toast-message"
 
 export default function Signup() {
   const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-  const insets = useSafeAreaInsets(); // Fixes Notch Area
+  const signup = useAuthStore((state) => state.signup);
+  const isLoading = useAuthStore((state) => state.isLoading);
+  //const insets = useSafeAreaInsets(); // Fixes Notch Area
 
   return (
     <SafeAreaView className="flex-1 bg-black px-6 pb-8">
@@ -34,9 +38,19 @@ export default function Signup() {
       {/* Formik Form */}
       <Formik
         initialValues={{ username: "", email: "", password: "" }}
-        validationSchema={SignupSchema}
-        onSubmit={(values) => {
-          console.log(values);
+        validationSchema={SignupSchema} // Attach validation schema
+        onSubmit={async (values) => {
+          try {
+            await signup(values.username, values.email, values.password);
+            router.push("/(tabs)/home"); // Redirect after successful signup
+          } catch (error: any) {
+            Toast.show({
+              type: "error",
+              text1: "Signup Failed",
+              text2: error.message || "Please try again",
+            });
+          }
+      
           // router.push("/dashboard");
         }}
       >
@@ -73,8 +87,10 @@ export default function Signup() {
             />
 
             {/* Signup Button with Glowing Effect */}
-            <TouchableOpacity className="bg-amber-500 py-4 rounded-lg mt-8 border-2 border-yellow-300 shadow-lg shadow-yellow-400" onPress={() => handleSubmit()}>
-              <Text className="text-center text-black font-bold text-lg">SIGN UP</Text>
+            <TouchableOpacity className="bg-amber-500 py-4 rounded-lg mt-8 border-2 border-yellow-300 shadow-lg shadow-yellow-400" onPress={() => handleSubmit()} disabled={isLoading}>
+            <Text className="text-center text-black font-bold text-lg">
+                {isLoading ? "Signing up..." : "SIGN UP"}
+              </Text>
             </TouchableOpacity>
           </Animated.View>
         )}
@@ -105,6 +121,8 @@ export default function Signup() {
         Already have an account?{" "}
         <Text className="text-amber-500 font-semibold ml-5 text-lg" onPress={() => router.push("/login")}>Sign In here</Text>
       </Text>
+
+      <Toast />
     </SafeAreaView>
   );
 }
