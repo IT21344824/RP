@@ -7,10 +7,14 @@ import { Formik } from "formik";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import FormInput from "../../components/formLogin"; // Reusable Input Component
 import { ForgotPasswordSchema } from "../../validations/ForgotPasswordSchema"; // Validation Schema
+import useAuthStore from "../../store/useAuthStore";
+import Toast from "react-native-toast-message";
 
 export default function ForgotPassword() {
   const router = useRouter();
-  const insets = useSafeAreaInsets(); // Fixes Notch Area
+  const sendPasswordReset = useAuthStore((state) => state.sendPasswordReset);
+  const isLoading = useAuthStore((state) => state.isLoading);
+  //const insets = useSafeAreaInsets(); // Fixes Notch Area
 
   return (
      <SafeAreaView className="flex-1 bg-black px-6 pb-8">
@@ -35,8 +39,7 @@ export default function ForgotPassword() {
         initialValues={{ email: "" }}
         validationSchema={ForgotPasswordSchema}
         onSubmit={(values) => {
-          console.log("Reset link sent to:", values.email);
-          // Add password reset logic here
+          sendPasswordReset(values.email, () => router.push("/verifyPin" as any));
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
@@ -54,14 +57,16 @@ export default function ForgotPassword() {
             {/* Reset Password Button */}
             <TouchableOpacity
   className="bg-amber-500 py-4 rounded-lg mt-8 border-2 border-yellow-300 shadow-lg shadow-yellow-400"
-  onPress={() => router.push("/verifyPin"as any)}
+  onPress={() => handleSubmit()} disabled={isLoading}
 >
-  <Text className="text-center text-black font-bold text-lg">Reset Password</Text>
+  <Text className="text-center text-black font-bold text-lg">{isLoading ? "Sending..." : "Reset Password"}</Text>
 </TouchableOpacity>
 
           </Animated.View>
         )}
       </Formik>
+    
+      <Toast />
     </SafeAreaView>
   );
 }

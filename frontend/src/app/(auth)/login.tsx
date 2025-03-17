@@ -7,11 +7,15 @@ import { Formik } from "formik";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import FormInput from "../../components/formLogin"; // Importing FormInput
 import { LoginSchema } from "../../validations/LoginSchema"; // Importing validation
+import useAuthStore from "../../store/useAuthStore";
+import Toast from 'react-native-toast-message';
 
 
 export default function Login() {
   const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const login = useAuthStore((state) => state.login);
+  const isLoading = useAuthStore((state) => state.isLoading);
 
   
   return (
@@ -35,10 +39,18 @@ export default function Login() {
       {/* Formik Form */}
       <Formik
         initialValues={{ email: "", password: "" }}
-        validationSchema={LoginSchema}
-        onSubmit={(values) => {
-          console.log(values);
-         router.push("/(tabs)/home" as any);
+        validationSchema={LoginSchema} // Attach the validation schema
+        onSubmit={async (values) => {
+          try {
+            await login(values.email, values.password);
+            router.push("/(tabs)/home");
+          } catch (error: any) {
+            Toast.show({
+              type: 'error',
+              text1: 'Login Failed',
+              text2: error.message || 'Invalid credentials',
+            });
+          }
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
@@ -49,7 +61,7 @@ export default function Login() {
               value={values.email}
               onChangeText={handleChange("email")}
               onBlur={handleBlur("email")}
-              error={touched.email && errors.email}
+              error={touched.email && errors.email} // Show error if field is touched and invalid
             />
 
             {/* Password Input */}
@@ -58,7 +70,7 @@ export default function Login() {
               value={values.password}
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
-              error={touched.password && errors.password}
+              error={touched.password && errors.password} // Show error if field is touched and invalid
               secureTextEntry={!passwordVisible}
               togglePassword={() => setPasswordVisible(!passwordVisible)}
               showPassword={passwordVisible}
@@ -70,8 +82,10 @@ export default function Login() {
             </TouchableOpacity>
 
             {/* Sign In Button with Glowing Border */}
-            <TouchableOpacity className="bg-amber-500 py-4 rounded-lg mt-8 border-2 border-yellow-300 shadow-lg shadow-yellow-400" onPress={() => handleSubmit()}> 
-              <Text className="text-center text-black font-bold text-lg">SIGN IN</Text>
+            <TouchableOpacity className="bg-amber-500 py-4 rounded-lg mt-8 border-2 border-yellow-300 shadow-lg shadow-yellow-400" onPress={() => handleSubmit()} disabled={isLoading}> 
+            <Text className="text-center text-black font-bold text-lg">
+                {isLoading ? "Signing in..." : "SIGN IN"}
+              </Text>
             </TouchableOpacity>
           </Animated.View>
         )}
@@ -103,6 +117,8 @@ export default function Login() {
         Don’t have an account?{' '}
         <Text className="text-amber-500 font-semibold ml-5 text-lg"onPress={() => router.push("/signup" as any)}>Sign up here</Text>
       </Text>
+
+      <Toast /> {/* Toast Messages Component */}
     </SafeAreaView>
   );
 }
