@@ -30,3 +30,38 @@ const HistoryCard: React.FC<HistoryCardProps> = ({ item }) => {
 };
 
 export default HistoryCard;
+
+
+// import React from "react";
+// import { View, Text, Image } from "react-native";
+// import Animated, { FadeInRight } from "react-native-reanimated";
+
+// interface HistoryCardProps {
+//   item: {
+//     predictedClass: string;
+//     classDescription: string;
+//     imageUrl: string;
+//     date: string;
+//   };
+// }
+
+// const HistoryCard: React.FC<HistoryCardProps> = ({ item }) => {
+//   return (
+//     <Animated.View
+//       entering={FadeInRight.duration(500)}
+//       className="border flex-row items-center p-3 rounded-lg gap-10 mb-3 shadow-md bg-white"
+//     >
+//       {/* Image */}
+//       <Image source={{ uri: item.imageUrl }} className="w-16 h-16 rounded-md" resizeMode="cover" />
+      
+//       {/* Text Content */}
+//       <View className="ml-3">
+//         <Text className="text-black font-bold">{item.predictedClass}</Text>
+//         <Text className="text-gray-500 text-sm">{item.classDescription}</Text>
+//         <Text className="text-gray-400 text-xs">{item.date}</Text>
+//       </View>
+//     </Animated.View>
+//   );
+// };
+
+// export default HistoryCard;

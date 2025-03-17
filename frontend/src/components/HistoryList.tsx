@@ -13,7 +13,7 @@ import { Gesture, GestureDetector } from "react-native-gesture-handler";
 const screenHeight = Dimensions.get("window").height;
 
 interface HistoryListProps {
-  data: Array<{ id: string; title: string; location: string; image: any }>;
+  data: Array<{ id: string; title: string; location: string; image: any; predictedClass: string; classDescription: string; imageUrl: string; date: string }>;
 }
 
 const HistoryList: React.FC<HistoryListProps> = ({ data }) => {
