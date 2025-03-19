@@ -17,6 +17,7 @@ import { StatusBar } from "expo-status-bar";
 import { MotiView } from "moti";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialIcons } from "@expo/vector-icons"; // For camera icon
+import Constants from "expo-constants";
 
 const Home3D = () => {
   const { width } = useWindowDimensions();
@@ -31,6 +32,10 @@ const Home3D = () => {
   });
 
   const [blinkAnim] = useState(new Animated.Value(1)); // Initial opacity 1
+
+
+  const LOCAL_IP = Constants.expoConfig?.hostUri?.split(":")[0]; // Extract the local IP dynamically
+  const BASE_URL = `http://${LOCAL_IP}:5000/predict`; // Use it in your API call
 
   useEffect(() => {
     const blink = () => {
@@ -72,7 +77,7 @@ const Home3D = () => {
     });
 
     try {
-      const response = await fetch("http://192.168.86.153:5000/predict", {
+      const response = await fetch(BASE_URL, {
         method: "POST",
         body: formData,
         headers: {
