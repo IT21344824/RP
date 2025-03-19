@@ -33,9 +33,9 @@
 //         </TouchableOpacity>
 //         <Text className="text-xl font-bold ml-4">Profile</Text>
 //       </View>
-      
+
 //       <Text className="text-center text-gray-500">Please fill out your details to update Account</Text>
-      
+
 //       {/* Profile Image */}
 //       <View className="items-center my-4">
 //         <TouchableOpacity onPress={pickImage} className="relative">
@@ -172,7 +172,7 @@ export default function ProfileScreen() {
 
     // Open Camera
     const result = await ImagePicker.launchCameraAsync({
-      mediaTypes:ImagePicker.MediaTypeOptions.Images, // Fix deprecated option
+      mediaTypes: ImagePicker.MediaTypeOptions.Images, // Fix deprecated option
       allowsEditing: true,
       aspect: [1, 1],
       quality: 1,
@@ -189,7 +189,7 @@ export default function ProfileScreen() {
       //console.log("Loaded User Data:", user); // Debugging
     });
   }, []);
-  
+
 
 
   const handleDeleteAccount = () => {

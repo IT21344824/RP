@@ -17,7 +17,7 @@ export default function Login() {
   const login = useAuthStore((state) => state.login);
   const isLoading = useAuthStore((state) => state.isLoading);
 
-  
+
   return (
     <SafeAreaView className="flex-1 bg-black px-6 pb-8">
       <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
@@ -82,8 +82,8 @@ export default function Login() {
             </TouchableOpacity>
 
             {/* Sign In Button with Glowing Border */}
-            <TouchableOpacity className="bg-amber-500 py-4 rounded-lg mt-8 border-2 border-yellow-300 shadow-lg shadow-yellow-400" onPress={() => handleSubmit()} disabled={isLoading}> 
-            <Text className="text-center text-black font-bold text-lg">
+            <TouchableOpacity className="bg-amber-500 py-4 rounded-lg mt-8 border-2 border-yellow-300 shadow-lg shadow-yellow-400" onPress={() => handleSubmit()} disabled={isLoading}>
+              <Text className="text-center text-black font-bold text-lg">
                 {isLoading ? "Signing in..." : "SIGN IN"}
               </Text>
             </TouchableOpacity>
@@ -99,23 +99,23 @@ export default function Login() {
       </View>
 
 
-        {/* Social Login */}
-        <View className="flex-row justify-center space-x-6 gap-10">
-                <TouchableOpacity onPress={() => console.log("Google Login Pressed")}> 
-                <Image source={require("../../assets/google.png")} className="w-10 h-10" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => console.log("Facebook Login Pressed")}> 
-                <Image source={require("../../assets/facebook.png")} className="w-10 h-10" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => console.log("Instagram Login Pressed")}> 
-                <Image source={require("../../assets/instagram.png")} className="w-10 h-10" />
-                </TouchableOpacity>
-            </View>
+      {/* Social Login */}
+      <View className="flex-row justify-center space-x-6 gap-10">
+        <TouchableOpacity onPress={() => console.log("Google Login Pressed")}>
+          <Image source={require("../../assets/google.png")} className="w-10 h-10" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => console.log("Facebook Login Pressed")}>
+          <Image source={require("../../assets/facebook.png")} className="w-10 h-10" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => console.log("Instagram Login Pressed")}>
+          <Image source={require("../../assets/instagram.png")} className="w-10 h-10" />
+        </TouchableOpacity>
+      </View>
 
       {/* Sign Up Link */}
       <Text className="text-gray-400 text-center mt-6">
         Don’t have an account?{' '}
-        <Text className="text-amber-500 font-semibold ml-5 text-lg"onPress={() => router.push("/signup" as any)}>Sign up here</Text>
+        <Text className="text-amber-500 font-semibold ml-5 text-lg" onPress={() => router.push("/signup" as any)}>Sign up here</Text>
       </Text>
 
       <Toast /> {/* Toast Messages Component */}

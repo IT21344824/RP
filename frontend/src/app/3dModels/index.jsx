@@ -62,6 +62,9 @@ const Home = () => {
     {
       navigate: "/3dModels/3dmodel_WSC",
       title: "11. Load WoodenSandalwoodCup 3D Model",
+    }, {
+      navigate: "/3dModels/3dmodel_CWP",
+      title: "12. Load Clay_Water_Pots 3D Model",
     },
   ];
 

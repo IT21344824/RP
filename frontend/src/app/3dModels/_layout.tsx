@@ -27,6 +27,7 @@ export default function ModelRootLayout() {
       <Stack.Screen name="3dmodel_SVMB/index" />
       <Stack.Screen name="3dmodel_WC/index" />
       <Stack.Screen name="3dmodel_WSC/index" />
+      <Stack.Screen name="3dmodel_CWP/index" />
 
     </Stack>
   );
