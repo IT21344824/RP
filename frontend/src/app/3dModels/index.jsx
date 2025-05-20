@@ -21,52 +21,95 @@ const Home = () => {
   const data = [
     {
       navigate: "/3dModels/3dModel",
-      title: "01. Load SandakadaPahana 3D Model",
+      title: "00. Load SandakadaPahana (Stone_Moonstone) 3D Model",
     },
     {
-      navigate: "/3dModels/3dModel3",
-      title: "02. Load ClayStoragePot 3D Model",
-    },
-    {
-      navigate: "/3dModels/3dModel4",
-      title: "03. Load ClayStoragePot_2 3D Model",
+      navigate: "/3dModels/3dmodel_Clay_Medium_Pots",
+      title: "01. Load ClayMediumPot 3D Model",
     },
     {
       navigate: "/3dModels/3dmodel_CKP",
-      title: "04. Load ClayKadaiPot 3D Model",
+      title: "02. Load ClayKadaiPot",
     },
     {
       navigate: "/3dModels/3dmodel_CMP",
-      title: "05. Load ClayMediumPot 3D Model",
+      title: "03. Load ClayMiniPot 3D Model",
     },
     {
       navigate: "/3dModels/3dmodel_Cp",
-      title: "06. Load ClayPlate 3D Model",
+      title: "04. Load ClayPlate 3D Model",
     },
     {
       navigate: "/3dModels/3dmodel_CRP",
-      title: "07. Load ClayRicePot 3D Model",
+      title: "05. Load ClayRicePot 3D Model",
+    },
+    {
+      navigate: "/3dModels/3dmodel_CSP",
+      title: "06. Load ClayStoragePot 3D Model",
+    },
+    {
+      navigate: "/3dModels/3dmodel_CTP",
+      title: "07. Load ClayTawaPlate 3D Model",
+    },
+    {
+      navigate: "/3dModels/3dmodel_Clay_Tea_Plate",
+      title: "08. Load ClayTeaPlate 3D Model",
+    },
+    {
+      navigate: "/3dModels/3dmodel_CWC",
+      title: "09. Load ClayWaterCups 3D Model",
+    },
+    {
+      navigate: "/3dModels/3dmodel_Clay_Water_Pots",
+      title: "10. Load ClayWaterPot 3D Model",
     },
     {
       navigate: "/3dModels/3dmodel_MC",
-      title: "08. Load MetalCup 3D Model",
+      title: "11. Load MetalCup 3D Model",
+    },
+    // {
+    //   navigate: "/3dModels/3dmodel_MP",
+    //   title: "12. Load MetalPot 3D Model",
+    // },
+    // {
+    //   navigate: "/3dModels/3dmodel_MS",
+    //   title: "13. Load MetalSword 3D Model",
+    // },
+    // {
+    //   navigate: "/3dModels/3dmodel_SP",
+    //   title: "14. Load StonePillar 3D Model",
+    // },
+    {
+      navigate: "/3dModels/3dmodel_SSG",
+      title: "15. Load StoneSandalwoodGrinder 3D Model",
     },
     {
       navigate: "/3dModels/3dmodel_SVMB",
-      title: "09. Load StoneVesselMetalBase 3D Model",
+      title: "16. Load StoneVesselMetalBase 3D Model",
+    },
+    {
+      navigate: "/3dModels/3dmodel_WCCS",
+      title: "17. Load WoodCarvedCoconutShell 3D Model",
+    },
+    {
+      navigate: "/3dModels/3dmodel_WCS",
+      title: "18. Load WoodCoconutShell 3D Model",
     },
     {
       navigate: "/3dModels/3dmodel_WC",
-      title: "10. Load WoodenCup 3D Model",
+      title: "19. Load WoodenCup 3D Model",
     },
     {
       navigate: "/3dModels/3dmodel_WSC",
-      title: "11. Load WoodenSandalwoodCup 3D Model",
-    }, {
-      navigate: "/3dModels/3dmodel_CWP",
-      title: "12. Load Clay_Water_Pots 3D Model",
+      title: "20. Load WoodenSandalwoodCup 3D Model",
+    },
+    {
+      navigate: "/3dModels/3dmodel_WSJ",
+      title: "21. Load WoodSandalwoodJar 3D Model",
     },
   ];
+
+
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

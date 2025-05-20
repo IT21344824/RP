@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ImageBackground, StatusBar, ScrollView, Dimensions ,SafeAreaView } from "react-native";
+import { View, Text, ImageBackground, StatusBar, ScrollView, Dimensions, SafeAreaView } from "react-native";
 import { useRouter } from "expo-router"; // Import useRouter
 import Header from "../../components/Header";
 import FeatureGrid from "../../components/FeatureGrid";
@@ -20,10 +20,16 @@ export default function HomeScreen() {
     },
     { id: "2", title: "Brahmi OCR", image: require("../../assets/ocr.jpg"), onPress: () => router.push("/brahmi") }, // Navigate to BrahmiScreen
     { id: "3", title: "Feature Extraction", image: require("../../assets/feature.png"), onPress: () => console.log("Feature Extraction") },
+    // {
+    //   id: "4", title: "3D Modeling", image: require("../../assets/3d.jpg"), onPress: () => {
+    //     console.log("3D Modeling")
+    //     router.push("/3dModels")
+    //   }
+    // },
     {
       id: "4", title: "3D Modeling", image: require("../../assets/3d.jpg"), onPress: () => {
-        console.log("3D Modeling")
-        router.push("/3dModels")
+        console.log("Dynamic 3D Modeling")
+        router.push("/Dynamic3DModel")
       }
     },
   ];

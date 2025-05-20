@@ -148,7 +148,7 @@ const Home3D = () => {
           router.push("/3dModels/3dmodel_CKP");
           break;
         case "Clay_Medium_Pots":
-          router.push("/3dModels/3dmodel_CKP");
+          router.push("/3dModels/3dmodel_Clay_Medium_Pots");
           break;
         case "Clay_Mini_Pots":
           router.push("/3dModels/3dmodel_CMP");
@@ -161,33 +161,52 @@ const Home3D = () => {
           break;
 
         case "Clay_Storage_Pots":
-          console.log("Clay_Storage_Pots")
-          alert(`can not identtify the object or can not create a 3d model`);
-          // router.push("/3dModels/3dModel4");
+          router.push("/3dModels/3dmodel_CSP");
           break;
         case "Clay_Tawa_Plates":
-          console.log("Clay_Tawa_Plates")
-          alert(`can not identtify the object or can not create a 3d model`);
-          // router.push("/3dModels/3dModel6");
+          router.push("/3dModels/3dmodel_CTP");
           break;
         case "Clay_Tea_Plates":
-          console.log("Clay_Tea_Plates")
-          alert(`can not identtify the object or can not create a 3d model`);
-          // router.push("/3dModels/3dModel2");
+          router.push("/3dModels/3dmodel_Clay_Tea_Plate");
           break;
         case "Clay_Water_Cups":
-          console.log("Clay_Water_Cups")
-          alert(`can not identtify the object or can not create a 3d model`);
-          // router.push("/3dModels/3dModel7");
+          router.push("/3dModels/3dmodel_CWC");
           break;
         case "Clay_Water_Pots":
-          console.log("Clay_Water_Pots")
-          alert(`can not identtify the object or can not create a 3d model`);
-          // router.push("/3dModels/3dModel8");
+          router.push("/3dModels/3dmodel_Clay_Water_Pots");
           break;
 
         case "Metal_Cups":
           router.push("/3dModels/3dmodel_MC");
+          break;
+
+        case "Stone_Moonstone":
+          router.push("/3dModels/3dModel");
+          break;
+
+        case "Stone_Sandalwood_Grinder":
+          router.push("/3dModels/3dmodel_SSG");
+          break;
+
+        case "Stone_Vessel_Metal_Base":
+          router.push("/3dModels/3dmodel_SVMB");
+          break;
+
+        case "Wood_Carved_Coconut_Shell":
+          router.push("/3dModels/3dmodel_WCCS");
+          break;
+        case "Wood_Coconut_Shell":
+          router.push("/3dModels/3dmodel_WCS");
+          break;
+
+        case "Wood_Cup":
+          router.push("/3dModels/3dmodel_WC");
+          break;
+        case "Wood_Sandalwood_Cup":
+          router.push("/3dModels/3dmodel_WSC");
+          break;
+        case "Wood_Sandalwood_Jar":
+          router.push("/3dModels/3dmodel_WSJ");
           break;
 
         case "Metal_Pots":
@@ -200,48 +219,13 @@ const Home3D = () => {
           alert(`can not identtify the object or can not create a 3d model`);
           // router.push("/3dModels/3dModel11");
           break;
-
-        case "Stone_Moonstone":
-          router.push("/3dModels/3dModel");
-          break;
-
         case "Stone_Pillars":
           console.log("Stone_Pillars")
           alert(`can not identtify the object or can not create a 3d model`);
           // router.push("/3dModels/3dModel13");
           break;
-        case "Stone_Sandalwood_Grinder":
-          console.log("Stone_Sandalwood_Grinder")
-          alert(`can not identtify the object or can not create a 3d model`);
-          // router.push("/3dModels/3dModel");
-          break;
 
-        case "Stone_Vessel_Metal_Base":
-          router.push("/3dModels/3dmodel_SVMB");
-          break;
 
-        case "Wood_Carved_Coconut_Shell":
-          console.log("Wood_Carved_Coconut_Shell")
-          alert(`can not identtify the object or can not create a 3d model`);
-          // router.push("/3dModels/3dModel16");
-          break;
-        case "Wood_Coconut_Shell":
-          console.log("Wood_Coconut_Shell")
-          alert(`can not identtify the object or can not create a 3d model`);
-          // router.push("/3dModels/3dModel17");
-          break;
-
-        case "Wood_Cup":
-          router.push("/3dModels/3dmodel_WC");
-          break;
-        case "Wood_Sandalwood_Cup":
-          router.push("/3dModels/3dmodel_WSC");
-          break;
-        case "Wood_Sandalwood_Jar":
-          console.log("Wood_Sandalwood_Jar")
-          alert(`can not identtify the object or can not create a 3d model`);
-          // router.push("/3dModels/3dModel20");
-          break;
         default:
           alert("No matching screen for the detected type.");
       }

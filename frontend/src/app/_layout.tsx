@@ -53,15 +53,16 @@ const Layout = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
 
 
-<Stack screenOptions={{ headerShown: false }}>
-  <Stack.Screen name="index" />
-  <Stack.Screen name="(auth)" />
-  <Stack.Screen name="3dModels" />
-  <Stack.Screen name="objectDetection" />
-</Stack>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(auth)" />
+        <Stack.Screen name="3dModels" />
+        <Stack.Screen name="objectDetection" />
+        <Stack.Screen name="Dynamic3DModel" />
 
-{/* Toast Messages Component */}
-<Toast />
+      </Stack>
+
+      <Toast />
     </GestureHandlerRootView>
   );
 };

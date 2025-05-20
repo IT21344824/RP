@@ -37,7 +37,7 @@ export default function TabsLayout() {
         tabBarActiveTintColor: "#D97706",
         tabBarInactiveTintColor: "#666",
       }}
-      tabBar={(props) => <CustomTabBar {...props} />} // Custom Tab Bar
+      tabBar={(props) => <CustomTabBar {...props} />}
     >
       <Tabs.Screen name="home" />
       <Tabs.Screen name="search" />

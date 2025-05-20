@@ -51,8 +51,7 @@ export default function Index() {
   if (isChecking) {
     return (
       <View className="flex-1">
-        <LauncherScreen />  
-        {/*  Activity Indicator while checking auth */}
+        <LauncherScreen />
         <ActivityIndicator size="large" color="#ff9800" style={{ position: "absolute", bottom: 50 }} />
       </View>
     );

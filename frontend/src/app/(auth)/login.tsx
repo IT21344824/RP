@@ -41,16 +41,17 @@ export default function Login() {
         initialValues={{ email: "", password: "" }}
         validationSchema={LoginSchema} // Attach the validation schema
         onSubmit={async (values) => {
-          try {
-            await login(values.email, values.password);
-            router.push("/(tabs)/home");
-          } catch (error: any) {
-            Toast.show({
-              type: 'error',
-              text1: 'Login Failed',
-              text2: error.message || 'Invalid credentials',
-            });
-          }
+          // try {
+          //   await login(values.email, values.password);
+          //   router.push("/(tabs)/home");
+          // } catch (error: any) {
+          //   Toast.show({
+          //     type: 'error',
+          //     text1: 'Login Failed',
+          //     text2: error.message || 'Invalid credentials',
+          //   });
+          // }
+          router.push("/(tabs)/home");
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
