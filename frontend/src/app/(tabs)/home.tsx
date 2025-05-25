@@ -19,7 +19,11 @@ export default function HomeScreen() {
       }
     },
     { id: "2", title: "Brahmi OCR", image: require("../../assets/ocr.jpg"), onPress: () => router.push("/brahmi") }, // Navigate to BrahmiScreen
-    { id: "3", title: "Feature Extraction", image: require("../../assets/feature.png"), onPress: () => console.log("Feature Extraction") },
+    { id: "3", title: "Feature Extraction", image: require("../../assets/feature.png"), onPress: () => {
+      console.log("Feature Extraction")
+      router.push("/feature" as any)
+    } 
+    },
     // {
     //   id: "4", title: "3D Modeling", image: require("../../assets/3d.jpg"), onPress: () => {
     //     console.log("3D Modeling")
