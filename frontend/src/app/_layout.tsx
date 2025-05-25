@@ -59,6 +59,7 @@ const Layout = () => {
         <Stack.Screen name="3dModels" />
         <Stack.Screen name="objectDetection" />
         <Stack.Screen name="Dynamic3DModel" />
+         <Stack.Screen name="featureDetection" />
 
       </Stack>
 
