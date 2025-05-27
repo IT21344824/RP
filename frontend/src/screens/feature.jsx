@@ -139,9 +139,13 @@ const Feature = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <StatusBar animated style="light" />
 
-          <MotiView from={{ opacity: 0, translateY: 50 }} animate={{ opacity: 1, translateY: 0 }} style={[styles.cardContainer, { width: width * 0.95 }]}>            
-            <Animated.Text style={[styles.cardText]}>ARCHITECTURAL FEATURE DETECTION</Animated.Text>
+            <MotiView from={{ opacity: 0, translateY: 50 }} animate={{ opacity: 1, translateY: 0 }} style={[styles.cardContainer, { width: width * 0.95 }]}>
+            
+              <Animated.Text style={[styles.cardText]}>
+                ARCHITECTURAL FEATURE DETECTION
+              </Animated.Text>
           </MotiView>
+
 
           <TouchableOpacity onPress={handleCamera} style={styles.cameraIconContainer}>
             <CameraIcon size={36} color="white" />
@@ -159,15 +163,45 @@ const Feature = () => {
             </TouchableOpacity>
           )}
 
-          {prediction && (
-            <View style={styles.detailsContainer}>
-              <Text style={styles.detailsText}><Text style={styles.label}>Feature Type:</Text> {prediction.class_name}</Text>
-              <Text style={styles.detailsText}><Text style={styles.label}>Time Period:</Text> {prediction.time_period}</Text>
-              <Text style={styles.detailsText}><Text style={styles.label}>Origin:</Text> {prediction.origin}</Text>
-              <Text style={styles.detailsText}><Text style={styles.label}>Cultural Significance:</Text> {prediction.cultural_significance}</Text>
-              {/* <Text style={styles.detailsText}><Text style={styles.label}>Confidence:</Text> {Math.round(prediction.confidence * 100)}%</Text> */}
-            </View>
-          )}
+         {prediction && (
+  <View style={styles.detailsContainer}>
+    <Text style={styles.detailsText}>
+      <Text style={styles.label}>Feature Type:</Text> {prediction.class_name}
+    </Text>
+
+    <Text style={styles.detailsText}>
+      <Text style={styles.label}>Description</Text>
+    </Text>
+
+    <View style={{ paddingLeft: 10 }}>
+
+       {prediction.description ? (
+        <Text style={styles.detailsText}>
+          <Text style={styles.label}> • Historical Context:</Text> {prediction.description}
+        </Text>
+      ) : null}
+      
+      {prediction.time_period ? (
+        <Text style={styles.detailsText}>
+          <Text style={styles.label}> • Typical Locations:</Text> {prediction.time_period}
+        </Text>
+      ) : null}
+
+      {prediction.origin ? (
+        <Text style={styles.detailsText}>
+           <Text style={styles.label}> • Symbolism:</Text> {prediction.origin}
+        </Text>
+      ) : null}
+
+      {prediction.cultural_significance ? (
+        <Text style={styles.detailsText}>
+          <Text style={styles.label}> • Material/Style:</Text> {prediction.cultural_significance}
+        </Text>
+      ) : null}
+    </View>
+  </View>
+)}
+
 
           {loading && <ActivityIndicator size="large" color="#F59E0B" />}
         </ScrollView>
@@ -177,11 +211,14 @@ const Feature = () => {
 };
 
 export default Feature;
-
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#000" },
+  container: {
+    flex: 1,
+    backgroundColor: "#2D1B0C",
+  },
+
   cardContainer: {
-    justifyContent: "center",
+     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
     backgroundColor: "#F59E0B",
@@ -191,12 +228,51 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 25,
   },
-  cardText: { color: "black", fontSize: 28, textAlign: "center", fontWeight: "bold" },
-  uploadButton: { backgroundColor: "#F59E0B", padding: 15, borderRadius: 10, margin: 20, alignItems: "center" },
-  uploadButtonText: { color: "black", fontSize: 18, fontWeight: "bold" },
-  selectedImage: { width: "100%", height: 300, marginVertical: 20 },
-  detailsContainer: { backgroundColor: "#222", padding: 15, borderRadius: 10, margin: 20 },
-  detailsText: { fontSize: 16, fontWeight: "bold", color: "#F59E0B", marginBottom: 5 },
-  label: { color: "white", fontWeight: "bold" },
-  cameraIconContainer: { alignItems: "center", marginTop: 10 },
+ 
+  cardText: {
+    color: "white",
+    fontSize: 28,
+    textAlign: "center",
+    fontWeight: "bold",
+    textShadowColor: 'rgba(0, 0, 0, 0.6)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+  },
+  uploadButton: {
+    backgroundColor: "#F59E0B",
+    padding: 15,
+    borderRadius: 10,
+    margin: 20,
+    alignItems: "center",
+  },
+  uploadButtonText: {
+    color: "black",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  selectedImage: {
+    width: "100%",
+    height: 300,
+    marginVertical: 20,
+  },
+  detailsContainer: {
+    backgroundColor: "white",
+    padding: 15,
+    borderRadius: 10,
+    margin: 20,
+  },
+  detailsText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "grey",
+    marginBottom: 5,
+  },
+  label: {
+    color: "black",
+    fontWeight: "bold",
+  },
+  cameraIconContainer: {
+    alignItems: "center",
+    marginTop: 10,
+  },
 });
