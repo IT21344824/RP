@@ -159,15 +159,45 @@ const Feature = () => {
             </TouchableOpacity>
           )}
 
-          {prediction && (
-            <View style={styles.detailsContainer}>
-              <Text style={styles.detailsText}><Text style={styles.label}>Feature Type:</Text> {prediction.class_name}</Text>
-              <Text style={styles.detailsText}><Text style={styles.label}>Time Period:</Text> {prediction.time_period}</Text>
-              <Text style={styles.detailsText}><Text style={styles.label}>Origin:</Text> {prediction.origin}</Text>
-              <Text style={styles.detailsText}><Text style={styles.label}>Cultural Significance:</Text> {prediction.cultural_significance}</Text>
-              {/* <Text style={styles.detailsText}><Text style={styles.label}>Confidence:</Text> {Math.round(prediction.confidence * 100)}%</Text> */}
-            </View>
-          )}
+         {prediction && (
+  <View style={styles.detailsContainer}>
+    <Text style={styles.detailsText}>
+      <Text style={styles.label}>Feature Type:</Text> {prediction.class_name}
+    </Text>
+
+    <Text style={styles.detailsText}>
+      <Text style={styles.label}>Description</Text>
+    </Text>
+
+    <View style={{ paddingLeft: 10 }}>
+
+       {prediction.description ? (
+        <Text style={styles.detailsText}>
+          <Text style={styles.label}> • Historical Context:</Text> {prediction.description}
+        </Text>
+      ) : null}
+      
+      {prediction.time_period ? (
+        <Text style={styles.detailsText}>
+          <Text style={styles.label}> • Typical Locations:</Text> {prediction.time_period}
+        </Text>
+      ) : null}
+
+      {prediction.origin ? (
+        <Text style={styles.detailsText}>
+           <Text style={styles.label}> • Symbolism:</Text> {prediction.origin}
+        </Text>
+      ) : null}
+
+      {prediction.cultural_significance ? (
+        <Text style={styles.detailsText}>
+          <Text style={styles.label}> • Material/Style:</Text> {prediction.cultural_significance}
+        </Text>
+      ) : null}
+    </View>
+  </View>
+)}
+
 
           {loading && <ActivityIndicator size="large" color="#F59E0B" />}
         </ScrollView>
