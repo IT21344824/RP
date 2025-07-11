@@ -1,0 +1,134 @@
+import os
+import time
+import logging
+import torch
+import numpy as np
+from flask import Flask, request, jsonify, send_file
+from PIL import Image
+import rembg
+import pymeshlab as pymesh
+from tsr.system import TSR
+from tsr.utils import remove_background, resize_foreground
+import imageio
+import trimesh
+from werkzeug.utils import secure_filename
+import psutil
+import shutil
+
+# Configure Logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+
+# Flask App
+app = Flask(__name__)
+UPLOAD_FOLDER = 'uploads'
+OUTPUT_FOLDER = "output"
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Load TripoSR Model
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+model = TSR.from_pretrained("stabilityai/TripoSR", config_name="config.yaml", weight_name="model.ckpt")
+model.to(device)
+logging.info("TripoSR Model Loaded.")
+
+def check_system_resources(min_disk_gb=2, min_ram_gb=32, max_cpu_load=90):
+    # Disk space check
+    total, used, free = shutil.disk_usage("/")
+    free_gb = free / (1024 ** 3)
+    if free_gb < min_disk_gb:
+        return False, f"Insufficient disk space: Only {free_gb:.2f} GB available."
+
+    # RAM check
+    available_ram_gb = psutil.virtual_memory().available / (1024 ** 3)
+    if available_ram_gb < min_ram_gb:
+        return False, f"Insufficient RAM: Only {available_ram_gb:.2f} GB available."
+
+    # CPU load check
+    cpu_usage = psutil.cpu_percent(interval=1)
+    if cpu_usage > max_cpu_load:
+        return False, f"High CPU load: {cpu_usage:.2f}% in use."
+
+    return True, "Sufficient system resources."
+
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+     # Check system resources
+    is_ok, message = check_system_resources()
+    if not is_ok:
+        logging.warning(message)
+        return jsonify({'error': message}), 503
+
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file uploaded'}), 400
+
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({'error': 'No file selected'}), 400
+
+    filename = secure_filename(file.filename)
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    file.save(file_path)
+    
+    logging.info(f"Received file: {filename}")
+    
+    return process_image(file_path)
+
+
+def process_image(file_path):
+    start_time = time.time()
+    image = Image.open(file_path).convert("RGBA").resize((512, 512))
+    
+    # Process Image
+    rembg_session = rembg.new_session()
+    image = remove_background(image, rembg_session)
+    image = resize_foreground(image, 0.85)
+    image = np.array(image).astype(np.float32) / 255.0
+    image = image[:, :, :3] * image[:, :, 3:4] + (1 - image[:, :, 3:4]) * 0.5
+    image = Image.fromarray((image * 255.0).astype(np.uint8))
+    
+    base_name = os.path.splitext(os.path.basename(file_path))[0]
+    image_dir = os.path.join(OUTPUT_FOLDER, base_name)
+    os.makedirs(image_dir, exist_ok=True)
+    image.save(os.path.join(image_dir, "processed.png"))
+    
+    # Run Model
+    with torch.no_grad():
+        scene_codes = model([image], device=device)
+    
+    # Rendering
+    render_images = model.render(scene_codes, n_views=30, return_type="pil")
+    render_video_path = os.path.join(image_dir, "render.mp4")
+    with imageio.get_writer(render_video_path, fps=30, codec="libx264") as writer:
+        for frame in render_images[0]:
+            writer.append_data(np.array(frame))
+    
+    # Export Mesh
+    meshes = model.extract_mesh(scene_codes, has_vertex_color=False)
+    mesh_file = os.path.join(image_dir, "model.obj")
+    meshes[0].export(mesh_file)
+    
+    glb_file = os.path.join(image_dir, "model.glb")
+    mesh_trimesh = trimesh.load(mesh_file)
+    mesh_trimesh.export(glb_file)
+    
+    process_time = time.time() - start_time
+    logging.info(f"Processing completed in {process_time:.2f} seconds.")
+    
+    return jsonify({
+        "status": "success",
+        "render_video": f"/download/{base_name}/render.mp4",
+        "mesh_obj": f"/download/{base_name}/model.obj",
+        "mesh_glb": f"/download/{base_name}/model.glb"
+    })
+
+@app.route('/download/<string:folder>/<string:filename>', methods=['GET'])
+def download_file(folder, filename):
+    file_path = os.path.join(OUTPUT_FOLDER, folder, filename)
+    if os.path.exists(file_path):
+        return send_file(file_path, as_attachment=True)
+    return jsonify({"error": "File not found"}), 404
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)

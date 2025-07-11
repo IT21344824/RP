@@ -1,0 +1,54 @@
+import os
+import logging
+from flask import Flask, request, jsonify, send_from_directory
+from werkzeug.utils import secure_filename
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+
+# Flask setup
+app = Flask(__name__)
+UPLOAD_FOLDER = 'uploads'
+STATIC_MODEL_PATH = 'output/Clay_Water_Cups/Clay_Water_Cups.glb'
+STATIC_VIDEO_PATH = 'output/Clay_Water_Cups/render.mp4'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Ensure necessary folders exist
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    """Handles file upload and returns static .glb model and video URLs."""
+    if 'file' not in request.files:
+        logging.error("No file uploaded")
+        return jsonify({'error': 'No file uploaded'}), 400
+
+    file = request.files['file']
+    if file.filename == '':
+        logging.error("No file selected")
+        return jsonify({'error': 'No file selected'}), 400
+
+    filename = secure_filename(file.filename)
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    file.save(file_path)
+    logging.info(f"File saved: {file_path}")
+
+    # Build static response
+    if os.path.exists(STATIC_MODEL_PATH) and os.path.exists(STATIC_VIDEO_PATH):
+        model_url = f"/output/Clay_Kadai_Pots/Clay_Kadai_Pots.glb"
+        video_url = f"/output/Clay_Kadai_Pots/render.mp4"
+        logging.info("Returning static model and video URLs")
+        return jsonify({
+            "modelGlb": model_url,
+            "renderVideo": video_url
+        })
+
+    logging.error("Static model or video not found")
+    return jsonify({'error': 'Static model or video not found'}), 500
+
+@app.route('/output/<path:filename>', methods=['GET'])
+def serve_output_file(filename):
+    return send_from_directory('output', filename, mimetype='application/octet-stream')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
