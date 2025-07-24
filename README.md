@@ -133,7 +133,7 @@ The project involves developing a mobile application to scan and extract histori
 |-----------------|---------------------------|--------------|
 | 3D Generation   |  Ekanayake T.E.M.A.P.     | IT21344824   |
 | Object Detection| Jayawardhana J.R.K.B.     | IT21352294   |
-| Brahmi OCR      | Ekanayake T.E.M.A.P.      | IT21344824   |
+| Brahmi OCR      | Serasinghe G.P.G.Y        | IT21360978   |
 | Architectural   | Ediriwickrama E.A.K.V.    | IT21273094   |
 
 ---
